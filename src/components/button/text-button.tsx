@@ -1,14 +1,16 @@
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 
 interface TextButtonProps {
   onClick: () => void;
-  text: string;
 }
 
-export const TextButton: FC<TextButtonProps> = ({ onClick, text }) => {
+export const TextButton: FC<PropsWithChildren<TextButtonProps>> = ({
+  onClick,
+  children,
+}) => {
   return (
-    <button className="text-blue hover:opacity-85" onClick={onClick}>
-      {text}
+    <button className="text-primary hover:opacity-85" onClick={onClick}>
+      {children}
     </button>
   );
 };
