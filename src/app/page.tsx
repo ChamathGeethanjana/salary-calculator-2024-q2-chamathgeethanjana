@@ -14,7 +14,6 @@ import { AddTransactionModal } from "./components/AddTransactionModal";
 import { TransactionItem } from "./components/TransactionItem";
 import { SalaryCard } from "./components/SalaryCard";
 import { MdRefresh } from "react-icons/md";
-import { parseNumberFormat } from "@/utils/number-format";
 
 export default function Home() {
   const [basicSalary, setBasicSalary] = useState<number>(0);
