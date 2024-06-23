@@ -49,4 +49,21 @@ export const selectDeductions = (state: RootState) =>
     (transaction) => transaction.type === "deduction"
   );
 
+export const selectTotalEarnings = (state: RootState) =>
+  state.transactions.transactions
+    .filter((transaction) => transaction.type === "earning")
+    .reduce((acc, transaction) => acc + transaction.amount, 0);
+
+export const selectTotalDeductions = (state: RootState) =>
+  state.transactions.transactions
+    .filter((transaction) => transaction.type === "deduction")
+    .reduce((acc, transaction) => acc + transaction.amount, 0);
+
+export const selectTotalAllowedEPFandETP = (state: RootState) =>
+  state.transactions.transactions
+    .filter(
+      (transaction) => transaction.type === "earning" && transaction.isEPFandETP
+    )
+    .reduce((acc, transaction) => acc + transaction.amount, 0);
+
 export default transactionSlice.reducer;
