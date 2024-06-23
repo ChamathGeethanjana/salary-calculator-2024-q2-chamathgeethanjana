@@ -1,7 +1,13 @@
 import { FC } from "react";
 import { Transaction } from "@/types";
 import { Formik } from "formik";
-import { Button, TextInput, Modal, ModalHandler } from "@/components";
+import {
+  Button,
+  TextInput,
+  Modal,
+  ModalHandler,
+  TextButton,
+} from "@/components";
 import { VALIDATION } from "@/config";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch } from "@/hooks";
@@ -85,12 +91,14 @@ export const AddTransactionModal: FC<AddTransactionModalProps> = ({
                   checked={values.isEPFandETP}
                   className="mr-2"
                 />
-                <span>EPF and ETF</span>
+                <span>EPF/ETF</span>
               </div>
             )}
 
             <div className="flex justify-end space-x-2">
-              <Button onClick={() => modalRef.current?.close()}>Cancel</Button>
+              <TextButton onClick={() => modalRef.current?.close()}>
+                Cancel
+              </TextButton>
               <Button onClick={handleSubmit}>Add</Button>
             </div>
           </div>
