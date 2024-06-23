@@ -1,17 +1,20 @@
 "use client";
 
-import { ModalHandler, TextButton, TextInput } from "@/components";
+import { ModalHandler, TextButton, TextInput, IconButton } from "@/components";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   removeTransaction,
   selectDeductions,
   selectEarnings,
+  resetTransactions,
 } from "@/slices/transactionSlice";
 import { Transaction } from "@/types";
 import { useRef, useState } from "react";
 import { AddTransactionModal } from "./components/AddTransactionModal";
 import { TransactionItem } from "./components/TransactionItem";
 import { SalaryCard } from "./components/SalaryCard";
+import { MdRefresh } from "react-icons/md";
+import { parseNumberFormat } from "@/utils/number-format";
 
 export default function Home() {
   const [basicSalary, setBasicSalary] = useState<number>(0);
@@ -42,11 +45,25 @@ export default function Home() {
     dispatch(removeTransaction(transaction));
   };
 
+  const handleReset = () => {
+    setBasicSalary(0);
+    dispatch(resetTransactions());
+  };
+
   return (
     <>
       <div className="p-3 max-w-5xl mx-auto flex flex-col sm:flex-row mt-14 gap-2">
-        <div className="bg-secondarybg w-full lg:w-7/12 p-5 border rounded-lg  border-gray">
-          <h1 className="text-xl font-semibold ">Calculate Your Salary</h1>
+        <div className="bg-secondarybg w-full lg:w-7/12 p-5 border rounded-lg  border-gray ">
+          <div className="flex justify-between">
+            <h1 className="text-xl font-semibold ">Calculate Your Salary</h1>
+
+            <TextButton onClick={handleReset}>
+              <div className="flex items-center gap-1">
+                <MdRefresh />
+                Reset
+              </div>
+            </TextButton>
+          </div>
           <div className="mt-4 pt-3">
             <TextInput
               textInputType="number"
@@ -75,8 +92,9 @@ export default function Home() {
                 onClick={() => {
                   handaleAddTransaction("earning");
                 }}
-                text="+ Add New Allowance"
-              />
+              >
+                + Add New Allowance
+              </TextButton>
             </div>
           </div>
           <hr className="mt-5 border-gray" />
@@ -97,14 +115,13 @@ export default function Home() {
             ))}
 
             <div className="pt-5">
-              <button
-                className="text-blue hover:opacity-85"
+              <TextButton
                 onClick={() => {
                   handaleAddTransaction("deduction");
                 }}
               >
                 + Add New Allowance
-              </button>
+              </TextButton>
             </div>
           </div>
         </div>
