@@ -1,23 +1,24 @@
-import { Modal, ModalHandler } from "@/components/model";
 import { FC } from "react";
 import { Transaction } from "@/types";
 import { Formik } from "formik";
-import { Button, TextInput } from "@/components";
+import { Button, TextInput, Modal, ModalHandler } from "@/components";
 import { VALIDATION } from "@/config";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch } from "@/hooks";
-import { addTransaction } from "@/slices/transactionSlice";
+import { addTransaction, updateTransaction } from "@/slices/transactionSlice";
 
 interface AddTransactionModalProps {
   modalRef: React.RefObject<ModalHandler>;
   type: "earning" | "deduction";
+  transaction?: Transaction;
 }
 
 export const AddTransactionModal: FC<AddTransactionModalProps> = ({
   modalRef,
   type,
+  transaction,
 }) => {
-  const initialState: Transaction = {
+  const initialState: Transaction = transaction ?? {
     id: uuidv4(),
     name: "",
     amount: 0,
@@ -28,7 +29,13 @@ export const AddTransactionModal: FC<AddTransactionModalProps> = ({
   const dispatch = useAppDispatch();
 
   const handleSubmit = (values: Transaction) => {
-    dispatch(addTransaction(values));
+    values = { ...values, amount: parseFloat(values.amount.toString()) };
+
+    if (transaction) {
+      dispatch(updateTransaction(values));
+    } else {
+      dispatch(addTransaction(values));
+    }
     modalRef.current?.close();
   };
 
