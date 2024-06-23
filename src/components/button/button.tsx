@@ -9,7 +9,10 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({
   children,
 }) => {
   return (
-    <button className="text-blue hover:opacity-85" onClick={onClick}>
+    <button
+      className="bg-primary text-white px-4 py-2 rounded-md hover:opacity-85"
+      onClick={onClick}
+    >
       {children}
     </button>
   );
