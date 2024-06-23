@@ -47,7 +47,26 @@ const Table: FC<TableProps> = ({
       </tbody>
       <tr className="border border-gray rounded-lg">
         <th className="text-left p-3 ">Net Salary (Take Home)</th>
-        <th className="text-right p-">Amount</th>
+        <th className="text-right p-">{}</th>
+      </tr>
+      <thead className="text-textgray text-sm ">
+        <tr className="">
+          <th className="text-left">Contribution from the Employer</th>
+          <th className="text-right"></th>
+        </tr>
+      </thead>
+      <tr>
+        <td className="text-left">Employeer EPF (12%)</td>
+        <td className="text-right"></td>
+      </tr>
+      <tr>
+        <td className="text-left">Employeer EPF (3%)</td>
+        <td className="text-right"></td>
+      </tr>
+      <br />
+      <tr>
+        <td className="text-left">CTC (Cost to Company)</td>
+        <td className="text-right"></td>
       </tr>
     </table>
   );

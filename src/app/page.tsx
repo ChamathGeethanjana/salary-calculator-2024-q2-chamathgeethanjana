@@ -4,20 +4,33 @@ import { useState } from "react";
 import { NumberInput } from "../components/input.number";
 import { TextButton } from "../components/text.button";
 import Table from "../components/table";
+import { Modal } from "../components/model";
 
-export default function Home() {
+type Item = {
+  name: string;
+  amount: number;
+};
+
+type Earnings = {
+  items: Item[];
+};
+
+type Deductions = {
+  items: Item[];
+};
+
+export default function Home(props: Earnings, Deductions) {
   const [basicSalary, setBasicSalary] = useState(100000);
   const [earnings, setEarnings] = useState(0);
+  const [netSalary, setNetSalary] = useState(150);
 
   return (
     <div className="p-3 max-w-5xl mx-auto flex flex-col sm:flex-row mt-14 gap-2">
       <div className="bg-secondarybg w-full lg:w-7/12 p-5 border rounded-lg  border-gray">
         <h1 className="text-xl font-semibold ">Calculate Your Salary</h1>
         <div className="mt-4 pt-3">
-          <div className="font-semibold">
-            <h2>Basic salary</h2>
-          </div>
           <NumberInput
+            label="Basic Salary"
             value={basicSalary}
             onChange={(value) => setBasicSalary(value)}
           />
@@ -29,11 +42,14 @@ export default function Home() {
           <span className="font-normal text-sm text-gray-500 text-textgray">
             Allowance, Fixed Allowance, Bonus and etc
           </span>
+          {/* <div>{props.items.map((item, index) => ())}</div> */}
           <div className="pt-5">
-            {/* <TextButton onClick={} text="+ Add New Allowance" /> */}
-            <button className="text-blue hover:opacity-85">
-              + Add New Allowance
-            </button>
+            <TextButton
+              onClick={() => {
+                <Modal />;
+              }}
+              text="+ Add New Allowance"
+            />
           </div>
         </div>
         <hr className="mt-5 border-gray" />

@@ -6,5 +6,9 @@ interface ButtonProps {
 }
 
 export const TextButton: FC<ButtonProps> = ({ onClick, text }) => {
-  return <button onClick={onClick}>{text}</button>;
+  return (
+    <button className="text-blue hover:opacity-85" onClick={onClick}>
+      {text}
+    </button>
+  );
 };
