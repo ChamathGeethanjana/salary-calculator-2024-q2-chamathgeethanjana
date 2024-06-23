@@ -30,11 +30,18 @@ export const transactionSlice = createSlice({
         state.transactions[index] = action.payload;
       }
     },
+    resetTransactions: (state) => {
+      state.transactions = [];
+    },
   },
 });
 
-export const { addTransaction, removeTransaction, updateTransaction } =
-  transactionSlice.actions;
+export const {
+  addTransaction,
+  removeTransaction,
+  updateTransaction,
+  resetTransactions,
+} = transactionSlice.actions;
 
 export const selectTransactions = (state: RootState) =>
   state.transactions.transactions;
